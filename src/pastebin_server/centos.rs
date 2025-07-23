@@ -1,5 +1,5 @@
 use crate::pastebin_server::provider_trait::{ErrorMessage, PasteBinUrl, ProviderTrait};
-use percent_encoding::{NON_ALPHANUMERIC, utf8_percent_encode};
+use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 use reqwest::blocking::ClientBuilder;
 use reqwest::header;
 use std::time::Duration;

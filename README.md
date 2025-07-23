@@ -5,10 +5,12 @@
 一个使用 Rust 编写的 [pastebinit](https://github.com/skorokithakis/pastebinit) 替代品，支持多种 Pastebin 服务
 
 ## 已支持的 Pastebin 服务
+
 - Debian Pastebin: https://paste.debian.net (Default)
 - Centos Pastebin: https://paste.centos.org
 
 ## 使用方法
+
 ```
 Just Paste It! A simple CLI tool to paste text to various pastebin services.
 
@@ -45,6 +47,7 @@ Options:
 上面的三种方式理论上是等价的，只要 text.txt 的内容相同，上传到 Pastebin 的内容也是相同的
 
 你可以继续添加参数:
+
 - `-s` 或 `--server`: 选择 Pastebin 服务，可选: `debian` / `centos`，默认值为 `debian`
 - `-t` 或 `--title`: 设置 Pastebin 的标题，默认值为空，并不所有的 Pastebin 服务都支持
 - `-p` 或 `--private`: 设置 Pastebin 的可见性，默认值为公开，并不是所有的 Pastebin 服务都支持
