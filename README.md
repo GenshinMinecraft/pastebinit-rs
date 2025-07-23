@@ -54,18 +54,18 @@ Options:
 
 - 管道符号输入
     ```bash
-    cat ./test.txt | ./pastebinit-rs
+    cat ./test.txt | pastebinit-rs
     ```
 - 终端输入
     ```bash
-    ./pastebinit-rs
+    pastebinit-rs
     Run on a terminal, try to type something and end by `EOF`!
     Hello, world! (text.txt 的文件内容)
     EOF
     ```
 - 文件输入
     ```bash
-    ./pastebinit-rs -f ./test.txt
+    pastebinit-rs -f ./test.txt
     ```
 
 上面的三种方式理论上是等价的，只要 text.txt 的内容相同，上传到 Pastebin 的内容也是相同的
