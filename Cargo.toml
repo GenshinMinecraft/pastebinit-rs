@@ -1,13 +1,12 @@
 [package]
 name = "pastebinit-rs"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2024"
 authors = ["GenshinMinecraft <gm@highp.ing>"]
 description = "Just Paste It! A simple CLI tool to paste text to various pastebin services."
 readme = "README.md"
 repository = "https://github.com/GenshinMinecraft/pastebinit-rs"
 license = "WTFPL"
-homepage = "https://rsbench.github.io"
 
 [badges]
 maintenance = { status = "actively-developed" }
