@@ -72,7 +72,7 @@ Options:
 
 你可以继续添加参数:
 
-- `-s` 或 `--server`: 选择 Pastebin 服务，可选: `debian` / `centos`，默认值为 `debian`
+- `-s` 或 `--server`: 选择 Pastebin 服务，可选: `debian` / `centos`，默认值为 `centos`
 - `-t` 或 `--title`: 设置 Pastebin 的标题，默认值为空，并不所有的 Pastebin 服务都支持
 - `-p` 或 `--private`: 设置 Pastebin 的可见性，默认值为公开，并不是所有的 Pastebin 服务都支持
 - `-r` 或 `--raw`: 显示 RAW Text 链接，默认值为 false

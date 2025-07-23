@@ -29,7 +29,7 @@ pub fn upload(
 #[command(name = "PastebinIt-rs", version, about)]
 pub struct Config {
     /// Select the pastebin provider
-    #[arg(short, long, value_enum, default_value_t = Provider::Debian)]
+    #[arg(short, long, value_enum, default_value_t = Provider::Centos)]
     pub server: Provider,
 
     /// Select file to upload (Ignored stdin)

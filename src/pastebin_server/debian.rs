@@ -47,8 +47,6 @@ impl ProviderTrait for Debian {
             .text()
             .map_err(|e| format!("Failed to read response text: {e}"))?;
 
-        println!("{}", response_text);
-
         let re = Regex::new(r"//paste\.debian\.net/plainh?/(\w+)").unwrap();
         let id = if let Some(caps) = re.captures(&response_text) {
             caps.get(1).map(|m| m.as_str()).unwrap_or("")
