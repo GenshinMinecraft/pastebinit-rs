@@ -9,6 +9,30 @@
 - Debian Pastebin: https://paste.debian.net (Default)
 - Centos Pastebin: https://paste.centos.org
 
+## 安装
+
+### 一键脚本
+
+Install:
+
+```bash
+bash <(wget -qO- -o- https://ghfast.top/https://raw.githubusercontent.com/GenshinMinecraft/pastebinit-rs/refs/heads/main/install.sh)
+```
+
+Uninstall:
+
+```bash
+bash <(wget -qO- -o- https://ghfast.top/https://raw.githubusercontent.com/GenshinMinecraft/pastebinit-rs/refs/heads/main/install.sh) uninstall
+```
+
+### Cargo Install
+
+若已拥有 Cargo 与 Rust 开发环境，可直接使用该安装方法
+
+```bash
+cargo install pastebinit-rs
+```
+
 ## 使用方法
 
 ```
