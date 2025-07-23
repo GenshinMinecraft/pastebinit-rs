@@ -1,66 +1,65 @@
-use std::time::Duration;
 use crate::pastebin_server::provider_trait::{ErrorMessage, PasteBinUrl, ProviderTrait};
-use regex::Regex;
+use percent_encoding::{NON_ALPHANUMERIC, utf8_percent_encode};
 use reqwest::blocking::ClientBuilder;
 use reqwest::header;
+use std::time::Duration;
 
-pub struct Debian;
-impl ProviderTrait for Debian {
+pub struct Centos;
+impl ProviderTrait for Centos {
     fn upload_paste(
         content: String,
         title: String,
-        private: bool,
+        _private: bool,
         raw: bool,
     ) -> Result<PasteBinUrl, ErrorMessage> {
-        if content.lines().collect::<Vec<&str>>().len() <= 2 {
-            return Err(String::from("Debian pastebin need more than 2 lines"))
-        }
-
-        let client = ClientBuilder::new().user_agent("PastebinIt-rs")
+        let client = ClientBuilder::new()
+            .user_agent("PastebinIt-rs")
             .timeout(Duration::from_secs(3))
             .build()
             .map_err(|e| format!("Failed to create HTTP client: {e}"))?;
 
-        let form = reqwest::blocking::multipart::Form::new()
-            .text("poster", title)
-            .text("lang", "-1")
-            .text("expire", "-1")
-            .text("private", {
-                if private { "1" } else { "0" }
-            })
-            .text("code", content);
+        let mut headers = header::HeaderMap::new();
+        headers.insert(
+            "Content-Type",
+            "application/x-www-form-urlencoded".parse().unwrap(),
+        );
 
-        let response = client.post("https://paste.debian.net/")
-            .headers(header::HeaderMap::new())
-            .multipart(form)
+        let payload = format!(
+            "name=PastebinIt-rs&title={}&lang=text&code={}&expire=14400000&submit=submit",
+            utf8_percent_encode(&title, NON_ALPHANUMERIC).collect::<String>(),
+            utf8_percent_encode(&content, NON_ALPHANUMERIC).collect::<String>()
+        );
+
+        let response = client
+            .post("https://paste.centos.org/")
+            .headers(headers)
+            .body(payload)
             .send()
             .map_err(|e| format!("Failed to create HTTP client: {e}"))?;
 
         if response.status() != 200 {
-            return Err(format!("Failed to upload paste: HTTP {}", response.status()));
+            return Err(format!(
+                "Failed to upload paste: HTTP {}",
+                response.status()
+            ));
         }
 
-        let response_text = response.text()
-            .map_err(|e| format!("Failed to read response text: {e}"))?;
-
-        let re = Regex::new(r"//paste\.debian\.net/plainh?/(\w+)").unwrap();
+        let response_text = response
+            .text()
+            .map_err(|e| format!("Failed to read response: {e}"))?;
+        use regex::Regex;
+        let re = Regex::new(r"https://paste\.centos\.org/view/download/?([a-zA-Z0-9]+)\b").unwrap();
         let id = if let Some(caps) = re.captures(&response_text) {
-            
-           caps.get(1).map(|m| m.as_str()).unwrap_or("")
+            let id = caps.get(1).map(|m| m.as_str()).unwrap_or("");
+            id
         } else {
             return Err("Failed to parse paste ID from response".to_string());
         };
 
         if raw {
-            if private {
-                Ok(format!("https://paste.debian.net/plainh/{id}"))
-            } else {
-                Ok(format!("https://paste.debian.net/plain/{id}"))
-            }
-        } else if private {
-            Ok(format!("https://paste.debian.net/?hidden={id}"))
+            Ok(format!("https://paste.centos.org/view/raw/{}", id))
         } else {
-            Ok(format!("https://paste.debian.net/{id}"))
+            Ok(format!("https://paste.centos.org/view/{}", id))
         }
     }
 }

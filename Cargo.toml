@@ -1,0 +1,26 @@
+[package]
+name = "pastebinit-rs"
+version = "0.0.2"
+edition = "2024"
+authors = ["GenshinMinecraft <gm@highp.ing>"]
+description = "Just Paste It! A simple CLI tool to paste text to various pastebin services."
+readme = "README.md"
+repository = "https://github.com/GenshinMinecraft/pastebinit-rs"
+license = "WTFPL"
+homepage = "https://rsbench.github.io"
+
+[badges]
+maintenance = { status = "actively-developed" }
+
+[dependencies]
+reqwest = { version = "0.12.22", default-features = false, features = ["multipart", "rustls-tls", "json", "blocking"] }
+clap = { version = "4.5.41", default-features = false, features = ["std", "help", "wrap_help", "derive", "color"] }
+#serde = { version = "1.0.219", default-features = false, features = ["std", "derive"]}
+#serde_json = { version = "1.0.141", default-features = false, features = ["std", "alloc"]  }
+regex = { version = "1.11.1", features = ["std"] }
+percent-encoding = { version = "2.3.1", default-features = false, features = ["std", "alloc"] }
+
+[profile]
+dev = { opt-level = 3 }
+release = { opt-level = 3, lto = true, codegen-units = 1, panic = "abort" }
+minimal = { inherits = "release", opt-level = "z", lto = true, codegen-units = 1, panic = "abort", debug = false, strip = true }
