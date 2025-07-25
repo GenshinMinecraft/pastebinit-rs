@@ -7,6 +7,7 @@ pub enum Provider {
     Debian,
     Centos,
     Meson,
+    LinkOf,
 }
 
 pub fn upload(
@@ -25,6 +26,9 @@ pub fn upload(
         }
         Provider::Meson => {
             pastebin_server::meson::Meson::upload_paste(content, title, private, raw)
+        }
+        Provider::LinkOf => {
+            pastebin_server::linkof::LinkOf::upload_paste(content, title, private, raw)
         }
     }
 }

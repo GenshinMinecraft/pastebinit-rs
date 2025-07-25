@@ -1,6 +1,6 @@
 [package]
 name = "pastebinit-rs"
-version = "0.0.5"
+version = "0.0.6"
 edition = "2024"
 authors = ["GenshinMinecraft <gm@highp.ing>"]
 description = "Just Paste It! A simple CLI tool to paste text to various pastebin services."
@@ -14,10 +14,10 @@ maintenance = { status = "actively-developed" }
 [dependencies]
 reqwest = { version = "0.12.22", default-features = false, features = ["multipart", "rustls-tls", "json", "blocking"] }
 clap = { version = "4.5.41", default-features = false, features = ["std", "help", "wrap_help", "derive", "color"] }
-#serde = { version = "1.0.219", default-features = false, features = ["std", "derive"]}
-#serde_json = { version = "1.0.141", default-features = false, features = ["std", "alloc"]  }
+miniserde = "0.1.42"
 regex = { version = "1.11.1", features = ["std"] }
 percent-encoding = { version = "2.3.1", default-features = false, features = ["std", "alloc"] }
+rand = { version = "0.8.5", default-features = false, features = ["std", "std_rng"] }
 
 [profile]
 dev = { opt-level = 3 }
