@@ -1,6 +1,6 @@
 [package]
 name = "pastebinit-rs"
-version = "0.0.4"
+version = "0.0.5"
 edition = "2024"
 authors = ["GenshinMinecraft <gm@highp.ing>"]
 description = "Just Paste It! A simple CLI tool to paste text to various pastebin services."

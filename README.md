@@ -8,6 +8,7 @@
 
 - Debian Pastebin: https://paste.debian.net (Default)
 - Centos Pastebin: https://paste.centos.org
+- Meson Pastebin: https://pb.meson.cc/
 
 ## 安装
 
@@ -38,10 +39,10 @@ cargo install pastebinit-rs
 ```
 Just Paste It! A simple CLI tool to paste text to various pastebin services.
 
-Usage: 
+Usage:
 
 Options:
-  -s, --server <SERVER>  Select the pastebin provider [default: debian] [possible values: debian, centos]
+  -s, --server <SERVER>  Select the pastebin provider [default: centos] [possible values: debian, centos, meson]
   -f, --file <FILE>      Select file to upload (Ignored stdin) [default: ]
   -t, --title <TITLE>    Set pastebin title [default: ]
   -p, --private          Set pastebin visibility

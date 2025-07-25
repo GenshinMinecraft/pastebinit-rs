@@ -35,7 +35,7 @@ impl ProviderTrait for Centos {
             .headers(headers)
             .body(payload)
             .send()
-            .map_err(|e| format!("Failed to create HTTP client: {e}"))?;
+            .map_err(|e| format!("Failed to send HTTP request: {e}"))?;
 
         if response.status().as_u16() == 413 {
             return Err("Payload Too Large".to_string());

@@ -6,6 +6,7 @@ use clap::{Parser, ValueEnum};
 pub enum Provider {
     Debian,
     Centos,
+    Meson,
 }
 
 pub fn upload(
@@ -21,6 +22,9 @@ pub fn upload(
         }
         Provider::Centos => {
             pastebin_server::centos::Centos::upload_paste(content, title, private, raw)
+        }
+        Provider::Meson => {
+            pastebin_server::meson::Meson::upload_paste(content, title, private, raw)
         }
     }
 }
