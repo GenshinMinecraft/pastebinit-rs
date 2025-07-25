@@ -24,7 +24,7 @@ fn main() {
                     continue;
                 }
 
-                if line == "EOF\n" {
+                if line.trim() == "EOF" {
                     break;
                 }
 

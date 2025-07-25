@@ -37,6 +37,10 @@ impl ProviderTrait for Centos {
             .send()
             .map_err(|e| format!("Failed to create HTTP client: {e}"))?;
 
+        if response.status().as_u16() == 413 {
+            return Err("Payload Too Large".to_string());
+        }
+
         if response.status() != 200 {
             return Err(format!(
                 "Failed to upload paste: HTTP {}",
