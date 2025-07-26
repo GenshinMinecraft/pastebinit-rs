@@ -11,7 +11,7 @@ impl ProviderTrait for TextDb {
         content: String,
         title: String,
         _private: bool,
-        raw: bool,
+        _raw: bool,
     ) -> Result<PasteBinUrl, ErrorMessage> {
         let client = ClientBuilder::new()
             .user_agent("PastebinIt-rs")
