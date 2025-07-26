@@ -59,9 +59,9 @@ impl ProviderTrait for OpenStack {
         };
 
         if raw {
-            Ok(format!("https://paste.openstack.org/raw/{}/", id))
+            Ok(format!("https://paste.openstack.org/raw/{id}/"))
         } else {
-            Ok(format!("https://paste.openstack.org/show/{}/", id))
+            Ok(format!("https://paste.openstack.org/show/{id}/"))
         }
     }
 }

@@ -54,16 +54,16 @@ impl ProviderTrait for Centos {
         use regex::Regex;
         let re = Regex::new(r"https://paste\.centos\.org/view/download/?([a-zA-Z0-9]+)\b").unwrap();
         let id = if let Some(caps) = re.captures(&response_text) {
-            let id = caps.get(1).map(|m| m.as_str()).unwrap_or("");
-            id
+            
+            caps.get(1).map(|m| m.as_str()).unwrap_or("")
         } else {
             return Err("Failed to parse paste ID from response".to_string());
         };
 
         if raw {
-            Ok(format!("https://paste.centos.org/view/raw/{}", id))
+            Ok(format!("https://paste.centos.org/view/raw/{id}"))
         } else {
-            Ok(format!("https://paste.centos.org/view/{}", id))
+            Ok(format!("https://paste.centos.org/view/{id}"))
         }
     }
 }

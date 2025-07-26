@@ -36,7 +36,7 @@ impl ProviderTrait for TextDb {
         );
 
         let response = client
-            .post(format!("https://textdb.online/update/?{}", payload))
+            .post(format!("https://textdb.online/update/?{payload}"))
             .send()
             .map_err(|e| format!("Failed to send HTTP request: {e}"))?;
 
@@ -51,10 +51,6 @@ impl ProviderTrait for TextDb {
             ));
         }
 
-        if raw {
-            Ok(format!("https://textdb.online/{}", title))
-        } else {
-            Ok(format!("https://textdb.online/{}", title))
-        }
+        Ok(format!("https://textdb.online/{title}"))
     }
 }
