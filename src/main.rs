@@ -55,12 +55,12 @@ fn main() {
         config.private,
         config.raw,
     )
-        .map_err(|e| {
-            eprintln!("Error uploading paste: {e}");
-            exit(1);
-        })
-        .ok()
-        .unwrap_or_default();
+    .map_err(|e| {
+        eprintln!("Error uploading paste: {e}");
+        exit(1);
+    })
+    .ok()
+    .unwrap_or_default();
 
     println!("{url}");
 }

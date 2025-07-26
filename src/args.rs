@@ -8,6 +8,8 @@ pub enum Provider {
     Centos,
     Meson,
     LinkOf,
+    TextDb,
+    OpenStack,
 }
 
 pub fn upload(
@@ -29,6 +31,12 @@ pub fn upload(
         }
         Provider::LinkOf => {
             pastebin_server::linkof::LinkOf::upload_paste(content, title, private, raw)
+        }
+        Provider::TextDb => {
+            pastebin_server::textdb::TextDb::upload_paste(content, title, private, raw)
+        }
+        Provider::OpenStack => {
+            pastebin_server::openstack::OpenStack::upload_paste(content, title, private, raw)
         }
     }
 }

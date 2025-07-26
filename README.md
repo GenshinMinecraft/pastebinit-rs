@@ -10,6 +10,8 @@
 - Centos Pastebin: https://paste.centos.org
 - Meson Pastebin: https://pb.meson.cc/
 - Note LinkOf Pastebin: https://note.linkof.link/
+- TextDb Pastebin: https://textdb.online/
+- OpenStack Pastebin: https://paste.openstack.org/
 
 ## 安装
 
@@ -43,7 +45,7 @@ Just Paste It! A simple CLI tool to paste text to various pastebin services.
 Usage:
 
 Options:
-  -s, --server <SERVER>  Select the pastebin provider [default: centos] [possible values: debian, centos, meson, link-of]
+  -s, --server <SERVER>  Select the pastebin provider [default: centos] [possible values: debian, centos, meson, link-of, text-db, open-stack]
   -f, --file <FILE>      Select file to upload (Ignored stdin) [default: ]
   -t, --title <TITLE>    Set pastebin title [default: ]
   -p, --private          Set pastebin visibility

@@ -1,11 +1,12 @@
 use crate::pastebin_server::provider_trait::{ErrorMessage, PasteBinUrl, ProviderTrait};
 use percent_encoding::{NON_ALPHANUMERIC, utf8_percent_encode};
+use rand::Rng;
+use rand::distributions::Alphanumeric;
 use reqwest::blocking::ClientBuilder;
-use reqwest::header;
 use std::time::Duration;
 
-pub struct Centos;
-impl ProviderTrait for Centos {
+pub struct TextDb;
+impl ProviderTrait for TextDb {
     fn upload_paste(
         content: String,
         title: String,
@@ -18,22 +19,24 @@ impl ProviderTrait for Centos {
             .build()
             .map_err(|e| format!("Failed to create HTTP client: {e}"))?;
 
-        let mut headers = header::HeaderMap::new();
-        headers.insert(
-            "Content-Type",
-            "application/x-www-form-urlencoded".parse().unwrap(),
-        );
+        let title = if title.is_empty() {
+            rand::thread_rng()
+                .sample_iter(&Alphanumeric)
+                .take(20)
+                .map(char::from)
+                .collect()
+        } else {
+            title
+        };
 
         let payload = format!(
-            "name=PastebinIt-rs&title={}&lang=text&code={}&expire=14400000&submit=submit",
+            "key={}&value={}",
             utf8_percent_encode(&title, NON_ALPHANUMERIC).collect::<String>(),
             utf8_percent_encode(&content, NON_ALPHANUMERIC).collect::<String>()
         );
 
         let response = client
-            .post("https://paste.centos.org/")
-            .headers(headers)
-            .body(payload)
+            .post(format!("https://textdb.online/update/?{}", payload))
             .send()
             .map_err(|e| format!("Failed to send HTTP request: {e}"))?;
 
@@ -48,22 +51,10 @@ impl ProviderTrait for Centos {
             ));
         }
 
-        let response_text = response
-            .text()
-            .map_err(|e| format!("Failed to read response: {e}"))?;
-        use regex::Regex;
-        let re = Regex::new(r"https://paste\.centos\.org/view/download/?([a-zA-Z0-9]+)\b").unwrap();
-        let id = if let Some(caps) = re.captures(&response_text) {
-            let id = caps.get(1).map(|m| m.as_str()).unwrap_or("");
-            id
-        } else {
-            return Err("Failed to parse paste ID from response".to_string());
-        };
-
         if raw {
-            Ok(format!("https://paste.centos.org/view/raw/{}", id))
+            Ok(format!("https://textdb.online/{}", title))
         } else {
-            Ok(format!("https://paste.centos.org/view/{}", id))
+            Ok(format!("https://textdb.online/{}", title))
         }
     }
 }
