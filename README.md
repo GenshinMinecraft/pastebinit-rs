@@ -4,12 +4,14 @@
 
 一个使用 Rust 编写的 [pastebinit](https://github.com/skorokithakis/pastebinit) 替代品，支持多种 Pastebin 服务
 
+由于各个服务商政策不同，本程序不会保证所上传数据安全性、时效性 (最短一小时最长永久)，并且大文件有极大概率上传不了
+
 ## 已支持的 Pastebin 服务
 
 - Debian Pastebin: https://paste.debian.net (Default)
 - Centos Pastebin: https://paste.centos.org
 - Meson Pastebin: https://pb.meson.cc/
-- Note LinkOf Pastebin: https://note.linkof.link/
+- Note LinkOf Pastebin: https://note.linkof.link/ (Recommend for large file)
 - TextDb Pastebin: https://textdb.online/
 - OpenStack Pastebin: https://paste.openstack.org/
 
